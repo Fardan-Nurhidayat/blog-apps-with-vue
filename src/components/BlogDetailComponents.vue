@@ -2,10 +2,18 @@
 import { useRoute, useRouter } from 'vue-router'
 import data from '../assets/data.js'
 const route = useRoute()
+const router = useRouter()
 const blog = data.find(blog => blog.id == route.params.id)
 if (!blog) {
   const router = useRouter()
   router.push({ name: 'NotFound' })
+}
+
+// delete method
+const deleteBlog = () => {
+  const index = data.findIndex(blog => blog.id == route.params.id)
+  data.splice(index, 1)
+  router.push({ name: 'blogs' })
 }
 </script>
 
@@ -78,6 +86,7 @@ if (!blog) {
           Edit
         </button>
         <button
+          @click="deleteBlog"
           type="button"
           class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
         >
