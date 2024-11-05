@@ -33,11 +33,16 @@ const router = createRouter({
       component: () => import('../views/404View.vue'),
     },
 
-    // method
+    // method CRUD
     {
       path: '/add-blog',
       name: 'add-blog',
       component: () => import('../views/AddBlogView.vue'),
+    },
+    {
+      path: '/edit-blog/:id',
+      name: 'edit-blog',
+      component: () => import('../views/EditBlogView.vue'),
     },
   ],
 })
