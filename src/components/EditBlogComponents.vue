@@ -1,16 +1,26 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import data from '../assets/data.js'
+import { localStorageKey } from '../assets/data.js'
 const route = useRoute()
 const router = useRouter()
-const blog = data.find(blog => blog.id == route.params.id)
+const blogs = JSON.parse(localStorage.getItem(localStorageKey)) || []
+let blog = blogs.find(blog => blog.id == route.params.id)
 const title = ref(blog.title)
 const body = ref(blog.body)
-const updateBlog = () => {
-  const index = data.findIndex(blog => blog.id == route.params.id)
-  data[index].title = title.value
-  data[index].body = body.value
+const updateBlog = e => {
+  e.preventDefault()
+  const updatedBlog = {
+    id: blog.id,
+    title: title.value,
+    body: body.value,
+  }
+  localStorage.setItem(
+    localStorageKey,
+    JSON.stringify(
+      blogs.map(blog => (blog.id === updatedBlog.id ? updatedBlog : blog)),
+    ),
+  )
   router.push({ name: 'blogs' })
 }
 </script>

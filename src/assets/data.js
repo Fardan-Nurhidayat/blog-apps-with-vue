@@ -18,4 +18,7 @@ const data = [
     body: 'A backend developer is a type of software engineer who creates the logical back-end and core computational logic of a website, software or information system. The developer creates components and features that are indirectly accessed by a user through a front-end application or system.',
   },
 ]
-export default data
+
+const localStorageKey = 'blog-posts'
+
+export { localStorageKey, data }

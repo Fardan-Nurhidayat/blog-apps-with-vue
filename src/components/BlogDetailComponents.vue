@@ -1,9 +1,11 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import data from '../assets/data.js'
+import { localStorageKey } from '../assets/data.js'
 const route = useRoute()
 const router = useRouter()
-const blog = data.find(blog => blog.id == route.params.id)
+let blogs = localStorage.getItem(localStorageKey)
+blogs = JSON.parse(blogs)
+const blog = blogs.find(blog => blog.id == route.params.id)
 if (!blog) {
   const router = useRouter()
   router.push({ name: 'NotFound' })
@@ -11,11 +13,14 @@ if (!blog) {
 
 // delete method
 const deleteBlog = () => {
-  const index = data.findIndex(blog => blog.id == route.params.id)
-  data.splice(index, 1)
+  localStorage.setItem(
+    localStorageKey,
+    JSON.stringify(blogs.filter(blog => blog.id != route.params.id)),
+  )
   router.push({ name: 'blogs' })
 }
 
+// Edit Router
 const editBlog = () => {
   router.push({ name: 'edit-blog', params: { id: route.params.id } })
 }

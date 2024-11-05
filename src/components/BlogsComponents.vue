@@ -1,9 +1,15 @@
 <script setup>
-import data from '../assets/data.js'
+import { localStorageKey, data } from '../assets/data.js'
+let blogs = localStorage.getItem(localStorageKey)
+blogs = JSON.parse(blogs)
+if (!blogs || blogs.length === 0) {
+  blogs = data
+  localStorage.setItem(localStorageKey, JSON.stringify(data))
+}
 </script>
 <template>
   <div
-    v-for="blog in data"
+    v-for="blog in blogs"
     :key="blog.id"
     class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
   >
