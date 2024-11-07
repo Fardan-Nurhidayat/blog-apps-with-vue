@@ -1,14 +1,19 @@
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue'
+import { localStorageKey } from '../assets/data.js'
 const title = ref('')
 const props = defineProps(['blogs'])
 const emit = defineEmits(['sendBlogs'])
 const showTitle = e => {
   e.preventDefault()
-  const blogs = props.blogs.filter(blog =>
-    blog.title.toLowerCase().includes(title.value.toLowerCase()),
-  )
-  emit('sendBlogs', blogs)
+  if (title.value == '') {
+    emit('sendBlogs', JSON.parse(localStorage.getItem(localStorageKey)))
+  } else {
+    const blogs = props.blogs.filter(blog =>
+      blog.title.toLowerCase().includes(title.value.toLowerCase()),
+    )
+    emit('sendBlogs', blogs)
+  }
 }
 </script>
 <template>
@@ -44,7 +49,6 @@ const showTitle = e => {
         id="default-search"
         class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Search Mockups, Logos..."
-        required
       />
       <button
         type="submit"

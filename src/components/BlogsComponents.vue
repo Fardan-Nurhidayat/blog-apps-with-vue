@@ -1,16 +1,26 @@
 <script setup>
-// import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { localStorageKey, data } from '../assets/data.js'
 import SearchComponents from '../components/SearchComponents.vue'
-let blogs = localStorage.getItem(localStorageKey)
-blogs = JSON.parse(blogs)
-if (!blogs || blogs.length === 0) {
-  blogs = data
-  localStorage.setItem(localStorageKey, JSON.stringify(data))
-}
 
-function receiveBlogs(data) {
-  console.log(data)
+// Menggunakan ref untuk membuat blogs menjadi reactive
+const blogs = ref([])
+
+// Initialize blogs data
+let storedBlogs = localStorage.getItem(localStorageKey)
+onMounted(() => {
+  if (storedBlogs) {
+    blogs.value = JSON.parse(storedBlogs)
+  } else {
+    blogs.value = data
+    localStorage.setItem(localStorageKey, JSON.stringify(data))
+  }
+})
+
+// Function to update blogs when search results change
+const receiveBlogs = searchResults => {
+  console.log(searchResults)
+  blogs.value = searchResults
 }
 </script>
 <template>
@@ -20,6 +30,11 @@ function receiveBlogs(data) {
     @send-blogs="receiveBlogs"
   />
   <div class="grid grid-cols-4 px-56 gap-5">
+    <div v-if="blogs.length === 0" class="col-span-4 text-center">
+      <p class="text-lg font-medium text-gray-900 dark:text-white mt-10">
+        No blogs found
+      </p>
+    </div>
     <div
       v-for="blog in blogs"
       :key="blog.id"
