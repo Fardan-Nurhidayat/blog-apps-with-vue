@@ -29,7 +29,9 @@ const receiveBlogs = searchResults => {
     v-bind:blogs="blogs"
     @send-blogs="receiveBlogs"
   />
-  <div class="grid grid-cols-4 px-56 gap-5">
+  <div
+    class="grid items-stretch xl:grid-cols-4 xl:justify-center lg:grid-cols-3 lg:gap-8 md:grid-cols-2 md:gap-6 sm:grid-cols-1"
+  >
     <div v-if="blogs.length === 0" class="col-span-4 text-center">
       <p class="text-lg font-medium text-gray-900 dark:text-white mt-10">
         No blogs found
@@ -38,7 +40,7 @@ const receiveBlogs = searchResults => {
     <div
       v-for="blog in blogs"
       :key="blog.id"
-      class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      class="max-w-xl p-6 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       <a href="#">
         <h5

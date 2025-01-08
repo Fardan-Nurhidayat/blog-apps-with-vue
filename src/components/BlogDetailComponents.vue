@@ -34,11 +34,6 @@ const editBlog = () => {
       >
         {{ blog.title }}
       </h2>
-      <p
-        class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white"
-      >
-        $2999
-      </p>
       <dl>
         <dt
           class="mb-2 font-semibold leading-none text-gray-900 dark:text-white"
@@ -48,28 +43,6 @@ const editBlog = () => {
         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
           {{ blog.body }}
         </dd>
-      </dl>
-      <dl class="flex items-center space-x-6">
-        <div>
-          <dt
-            class="mb-2 font-semibold leading-none text-gray-900 dark:text-white"
-          >
-            Category
-          </dt>
-          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-            Electronics/PC
-          </dd>
-        </div>
-        <div>
-          <dt
-            class="mb-2 font-semibold leading-none text-gray-900 dark:text-white"
-          >
-            Item weight
-          </dt>
-          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-            12kg
-          </dd>
-        </div>
       </dl>
       <div class="flex items-center space-x-4">
         <button

@@ -21,7 +21,7 @@ const updateBlog = e => {
       blogs.map(blog => (blog.id === updatedBlog.id ? updatedBlog : blog)),
     ),
   )
-  router.push({ name: 'blogs' })
+  router.push({ name: 'home' })
 }
 </script>
 

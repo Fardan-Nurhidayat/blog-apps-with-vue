@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { localStorageKey } from '../assets/data.js'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const blogs = JSON.parse(localStorage.getItem(localStorageKey)) || []
 const title = ref('')
 const body = ref('')
@@ -16,6 +18,7 @@ const addBlog = e => {
     title.value = ''
     body.value = ''
   }
+  router.push({ name: 'home' })
 }
 
 function isStorageExist() {
